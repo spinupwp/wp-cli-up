@@ -1,11 +1,14 @@
 {
     "name": "deliciousbrains/wp-cli-up",
+    "type": "wp-cli-package",
     "repositories": [
         {
             "type": "composer",
             "url": "https://wp-cli.org/package-index/"
         }
     ],
-    "minimum-stability": "dev",
+    "autoload": {
+        "files": [ "up.php" ]
+    },
     "require": {}
 }
