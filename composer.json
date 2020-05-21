@@ -6,6 +6,6 @@
             "url": "https://wp-cli.org/package-index/"
         }
     ],
-    "minimum-stability": "=dev",
+    "minimum-stability": "dev",
     "require": {}
 }
