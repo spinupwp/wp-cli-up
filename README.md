@@ -14,7 +14,7 @@ This is a work in progress. Not meant for public use just yet.
 
 ## Installation
 
-    curl -o- https://raw.githubusercontent.com/bradt/wp-cli-up/master/install.sh | bash
+    curl -o- https://raw.githubusercontent.com/deliciousbrains/wp-cli-up/master/install.sh | bash
 
 MySQL root user password is 'root'.
 
