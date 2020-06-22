@@ -12,7 +12,7 @@ sudo service nginx reload
 
 mysql -u root -proot -e 'DROP DATABASE <?php echo $dbname; ?>;'
 
-mysql -u root -proot -e 'REVOKE ALL PRIVILEGES ON <?php echo $dbuser; ?>.* FROM "<?php echo $dbuser; ?>"@"localhost";'
+mysql -u root -proot -e 'REVOKE ALL PRIVILEGES ON <?php echo $dbname; ?>.* FROM "<?php echo $dbuser; ?>"@"localhost";'
 
 mysql -u root -proot -e 'DROP USER IF EXISTS "<?php echo $dbuser; ?>"@"localhost"; FLUSH PRIVILEGES;'
 

@@ -67,20 +67,20 @@ sudo ln -s /etc/nginx/sites-available/<?php echo $domain; ?> /etc/nginx/sites-en
 
 sudo service nginx reload
 
-mysql -u root -proot -e 'DROP USER IF EXISTS "<?php echo $username; ?>"@"localhost";'
+mysql -u root -proot -e 'DROP USER IF EXISTS "<?php echo $dbuser; ?>"@"localhost";'
 
-mysql -u root -proot -e 'CREATE USER "<?php echo $username; ?>"@"localhost" IDENTIFIED BY "<?php echo $passwd; ?>";'
+mysql -u root -proot -e 'CREATE USER "<?php echo $dbuser; ?>"@"localhost" IDENTIFIED BY "<?php echo $dbpass; ?>";'
 
-mysql -u root -proot -e 'GRANT ALL PRIVILEGES ON <?php echo $username; ?>.* TO "<?php echo $username; ?>"@"localhost"; FLUSH PRIVILEGES;'
+mysql -u root -proot -e 'GRANT ALL PRIVILEGES ON <?php echo $dbname; ?>.* TO "<?php echo $dbuser; ?>"@"localhost"; FLUSH PRIVILEGES;'
 
 cd ~/wp-cli-up/sites/<?php echo $domain; ?>/files/public
 
 wp core download --quiet
 
-wp core config --quiet --dbname=<?php echo $username; ?> --dbuser=<?php echo $username; ?> --dbpass=<?php echo $passwd; ?>
+wp core config --quiet --dbname='<?php echo $dbname; ?>' --dbuser='<?php echo $dbuser; ?>' --dbpass='<?php echo $dbpass; ?>' --dbprefix='<?php echo $dbprefix; ?>'
 
 wp db create --quiet
 
-wp core install --quiet --url=https://<?php echo $domain; ?> --title='<?php echo $domain; ?>' --admin_user=<?php echo $username; ?> --admin_email=nobody@nobody.com --admin_password=<?php echo $passwd; ?> --skip-email
+wp core install --quiet --url='https://<?php echo $domain; ?>' --title='<?php echo $title; ?>' --admin_user='<?php echo $admin_user; ?>' --admin_email='<?php echo $admin_email; ?>' --admin_password='<?php echo $admin_password; ?>' --skip-email
 
 EOMULTIPASSCMD

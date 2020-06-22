@@ -73,4 +73,4 @@ echo "Enter your macOS password to add the root certificate to your keychain..."
 
 sudo security add-trusted-cert -d -r trustRoot -k "/Library/Keychains/System.keychain" root-ca.pem
 
-wp package install --quiet https://github.com/deliciousbrains/wp-cli-up.git
+wp package install --quiet --allow-root https://github.com/deliciousbrains/wp-cli-up.git
