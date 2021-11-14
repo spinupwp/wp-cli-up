@@ -22,6 +22,34 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
  */
 class WP_CLI_Up {
 
+    /**
+     * Generates a random password drawn from the defined set of characters.
+     * Taking from WP cores wp_generate_password function
+     *
+     * Uses wp_rand() is used to create passwords with far less predictability
+     * than similar native PHP functions like `rand()` or `mt_rand()`.
+     *
+     * @param int  $length              Optional. The length of password to generate. Default 12.
+     * @param bool $special_chars       Optional. Whether to include standard special characters.
+     *                                  Default true.
+     *
+     * @return string The random password.
+     */
+    protected function generate_password($length = 12, $special_chars = true)
+    {
+        $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        if ($special_chars) {
+            $chars .= '!@#$%^&*()';
+        }
+
+        $password = '';
+        for ($i = 0; $i < $length; $i++) {
+            $password .= substr($chars, wp_rand(0, strlen($chars) - 1), 1);
+        }
+
+        return $password;
+    }
+
 	/**
 	 * Removes a site from the wp-cli-up multipass instance
 	 *
@@ -141,16 +169,16 @@ class WP_CLI_Up {
 
 		$username = $this->get_username_from_domain( $domain );
 
-		$defaults = [
-			'dbname' => $username,
-			'dbuser' => $username,
-			'dbpass' => base_convert( uniqid( 'pass', true ), 10, 20 ),
-			'dbprefix' => 'wp_',
-			'title'  => $domain,
-			'admin_user' => 'admin',
-			'admin_password' => base_convert( uniqid( 'pass', true ), 10, 20 ),
-			'admin_email' => 'nobody@nobody.com'
-		];
+        $defaults = [
+            'dbname' => $username,
+            'dbuser' => $username,
+            'dbpass' => $this->generate_password(16, true),
+            'dbprefix' => 'wp_',
+            'title' => $domain,
+            'admin_user' => 'admin',
+            'admin_password' => $this->generate_password(16, true),
+            'admin_email' => 'nobody@nobody.com'
+        ];
 		$args = array_merge( $defaults, $assoc_args );
 
 		$args['domain'] = $domain;
