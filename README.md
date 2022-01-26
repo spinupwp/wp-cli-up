@@ -1,10 +1,9 @@
 # wp-cli-up
 
-A WP-CLI package to set up a [Multipass](https://multipass.run/) virtual machine (VM) and manage WordPress sites on the VM remotely from the macOS terminal.
+A WP-CLI package to set up a [Multipass](https://multipass.run/) virtual machine (VM) and manage WordPress sites on the VM remotely from the Ubuntu terminal.
 
 ## Requirements
 
-* macOS only
 * [Multipass](https://multipass.run/)
 * [WP-CLI](https://wp-cli.org/)
 
@@ -14,16 +13,16 @@ A WP-CLI package to set up a [Multipass](https://multipass.run/) virtual machine
 
 Once installation is complete, you should have a new Multipass VM called 'wp-cli-up' with the following software is installed:
 
-* PHP 7.4
+* PHP 8.1
 * Nginx
-* MariaDB (root user password is 'root')
+* MySQL (root user password is 'root')
 * Composer
 * WP-CLI
 * Redis
 
-In addition, a root SSL certificate is generated and stored on your macOS keychain to allow the generation trusted SSL certificates for each site. You will find the root certificate in your \~/wp-cli-up folder.
+In addition, a root SSL certificate is generated and stored on your Ubuntu certificate store to allow the generation trusted SSL certificates for each site. You will find the root certificate in your \~/wp-cli-up folder.
 
-Also in your \~/wp-cli-up folder, you will a sites folder, this is where your site files will be found.
+Also in your \~/wp-cli-up folder, you will find a sites folder, this is where your site files will be found.
 
 Let's add our first site...
 
@@ -51,8 +50,10 @@ Removing a site will remove all the SSL certificate files, Nginx confiugration f
 
     multipass delete wp-cli-up
     multipass purge
+    sudo rm /usr/local/share/ca-certificates/root-ca.crt
+    sudo update-ca-certificates
     wp package uninstall deliciousbrains/wp-cli-up
 
 If you want to delete all your files as well:
 
-    rm -Rf ~/wp-cli-up
+    rm -rf ~/wp-cli-up
