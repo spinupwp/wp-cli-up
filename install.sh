@@ -76,4 +76,4 @@ sudo cp ~/wp-cli-up/root-ca/root-ca.pem /usr/local/share/ca-certificates/root-ca
 
 sudo update-ca-certificates
 
-wp package install --quiet --allow-root https://github.com/deliciousbrains/wp-cli-up.git
+sudo wp package install --quiet --allow-root https://github.com/deliciousbrains/wp-cli-up.git

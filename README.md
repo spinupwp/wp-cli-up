@@ -30,7 +30,9 @@ Let's add our first site...
 
     sudo wp up add --allow-root <domain>
 
-_The command needs to be run as root so the macOS /etc/hosts file can be updated._
+    sudo -u <user> -i wp up add <domain>
+
+_The command needs to be run as root so the /etc/hosts file can be updated._
 
 Adding a site will generate a new SSL certificate, create a new Nginx configuration, create a new database and database user, and download and install WordPress.
 
@@ -40,7 +42,7 @@ Adding a site will generate a new SSL certificate, create a new Nginx configurat
 
 _The command needs to be run as root so the macOS /etc/hosts file can be updated._
 
-Removing a site will remove all the SSL certificate files, Nginx confiugration files, database, database user, and site files.
+Removing a site will remove all the SSL certificate files, Nginx configuration files, database, database user, and site files.
 
 ## SSH to the VM
 
@@ -52,7 +54,7 @@ Removing a site will remove all the SSL certificate files, Nginx confiugration f
     multipass purge
     sudo rm /usr/local/share/ca-certificates/root-ca.crt
     sudo update-ca-certificates
-    wp package uninstall deliciousbrains/wp-cli-up
+    sudo wp package uninstall deliciousbrains/wp-cli-up
 
 If you want to delete all your files as well:
 

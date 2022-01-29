@@ -51,7 +51,7 @@ server {
 	location ~ \.php$ {
 		try_files \\\$uri =404;
 		include global/fastcgi-params.conf;
-		fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+		fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
 	}
 }
 
