@@ -44,12 +44,11 @@ runcmd:
   - mv wp-cli.phar /usr/local/bin/wp
   - apt-get install -y mysql-server
   - service mysql stop
-  - echo "" >> /etc/mysql/conf.d/mysql.cnf
-  - echo "[mysqld]" >> /etc/mysql/conf.d/mysql.cnf
-  - echo "default_authentication_plugin=mysql_native_password" >> /etc/mysql/conf.d/mysql.cnf
+  - echo "" >> /etc/mysql/mysql.conf.d/mysqld.cnf
+  - echo "default_authentication_plugin=mysql_native_password" >> /etc/mysql/mysql.conf.d/mysqld.cnf
   - service mysql start
   - mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';"
-  - mysql -e "FLUSH PRIVILEGES;"
+  - mysql -uroot -proot -e "FLUSH PRIVILEGES;"
 EOT
 
 mkdir -p ~/wp-cli-up
