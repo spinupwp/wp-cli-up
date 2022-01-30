@@ -52,9 +52,10 @@ Removing a site will remove all the SSL certificate files, Nginx configuration f
 
     multipass delete wp-cli-up
     multipass purge
+    wp package uninstall deliciousbrains/wp-cli-up
     sudo rm /usr/local/share/ca-certificates/root-ca.crt
     sudo update-ca-certificates
-    sudo wp package uninstall deliciousbrains/wp-cli-up
+    sudo wp package uninstall --allow-root deliciousbrains/wp-cli-up
 
 If you want to delete all your files as well:
 

@@ -50,10 +50,12 @@ runcmd:
   - echo "default_authentication_plugin=mysql_native_password" >> /etc/mysql/mysql.conf.d/mysqld.cnf
   - service mysql start
   - mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';"
-  - mysql -uroot -ppassword -e "FLUSH PRIVILEGES;"
+  - mysql -uroot -proot -e "FLUSH PRIVILEGES;"
 EOT
 
-mkdir -p ~/wp-cli-up
+echo "Enter your Ubuntu password to allow wp-cli-up to continue..."
+
+sudo mkdir -p ~/wp-cli-up
 
 multipass mount ~/wp-cli-up wp-cli-up:/home/ubuntu/wp-cli-up
 
@@ -67,8 +69,6 @@ openssl genrsa -des3 -out root-ca.key -passout pass:wpcliup 2048 2> /dev/null
 
 openssl req -x509 -new -nodes -key root-ca.key -passin pass:wpcliup \
   -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=www.wp-cli-up.org" -sha256 -days 1825 -out root-ca.pem
-
-echo "Enter your Ubuntu password to add the root certificate to the local certificate store..."
 
 sudo apt-get install -y ca-certificates
 
